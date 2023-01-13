@@ -7,7 +7,10 @@ You can interact with them via
 
 This project has two main models and a CRUD for each:
 
+- Player
+- Team
 
+Below you can find the database diagram.
 
 ## Prerequisites
 
@@ -15,13 +18,13 @@ This project has two main models and a CRUD for each:
 
 ## Run project
 
-To run this project localy you just need to download and type:
+To run this project locally you just need to download it, position yourself in the project path and type:
 
 ```python
 docker compose up --build
 ```
 
-And Docker makes all the magic that it makes to do and the you will can access to
+After that Docker will make their magic and the project will be executing:
 
 ```python
 http://localhost:8000/admin/
@@ -37,7 +40,7 @@ http://localhost:8000/api/doc/
 
 ## Populate DB
 
-The project has a script to populate the db, you just need following the next instructions:
+The project has a script to populate the database, you just need to follow the instructions below:
 
 Access to Django shell:
 
@@ -62,10 +65,10 @@ username: admin
 email: admin@example.com
 password: admin_pass
 
-Now you can play and interact with the API!
+¡Now you can play and interact with the API!
 ```
 
-Now just type:
+At the end just type:
 ```python
 exit()
 ```
