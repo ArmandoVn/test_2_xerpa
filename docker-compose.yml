@@ -34,7 +34,6 @@ services:
       - SQL_DATABASE=soccer_app
       - SQL_USER=postgres
       - SQL_PASSWORD=postgres
-
     volumes:
       - .:/src
     ports:
