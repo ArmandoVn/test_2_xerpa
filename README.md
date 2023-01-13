@@ -1,13 +1,39 @@
 # The Soccer App
 
-This is a basic football API, you can interact with them via
-[Postman]("#") or via [Swagger]("http://localhost:8000/api/doc/")
+This is a basic football API with players and teams.
+
+You can interact with them via 
+[Postman]("https://api.postman.com/collections/17143949-2d67e437-a117-4124-aa06-236e39f05714?access_key=PMAT-01GPP8YNJP8S97AXG9NPVMGDQW") or via Swagger: "http://localhost:8000/api/doc/"
+
+This project has two main models and a CRUD for each:
+
+
+
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
 
 ## Run project
 
+To run this project localy you just need to download and type:
+
+```python
+docker compose up --build
+```
+
+And Docker makes all the magic that it makes to do and the you will can access to
+
+```python
+http://localhost:8000/admin/
+http://localhost:8000/api/
+http://localhost:8000/api/doc/
+```
 
 ## Run tests
 
+```bash
+  docker-compose run web python manage.py test .
+```
 
 ## Populate DB
 
@@ -47,6 +73,4 @@ exit()
 And execute the project again!
 
 # DB Diagram
-
-
-# Resources
+![DB Diagram](https://github.com/ArmandoVn/test_2_xerpa/blob/development/DB_Diagram.png)
