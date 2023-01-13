@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:13-alpine
+    hostname: db
+    environment:
+      - POSTGRES_DB=soccer_app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_NAME=soccer_app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    command: python manage.py migrate
+    volumes:
+      - .:/src
+    depends_on:
+      - db
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - POSTGRES_NAME=soccer_app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - .:/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  redis:
+    restart: always
+    image: redis:7.0.7-alpine
