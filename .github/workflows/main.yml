@@ -19,7 +19,6 @@ jobs:
           echo "DEBUG=0" >> .env
           echo "SQL_ENGINE=django.db.backends.postgresql" >> .env
           echo "DATABASE=postgres" >> .env
-          echo "SECRET_KEY=django-insecure-bg=v3_$g7z@j8g0s4fet^f=wepr__**3!fgs@fe@#+4xomk^)#" >> .env
           echo "SQL_DATABASE=${{ secrets.SQL_DATABASE }}" >> .env
           echo "SQL_USER=${{ secrets.SQL_USER }}" >> .env
           echo "SQL_PASSWORD=${{ secrets.SQL_PASSWORD }}" >> .env
@@ -58,7 +57,6 @@ jobs:
           echo "DEBUG=0" >> .env
           echo "SQL_ENGINE=django.db.backends.postgresql" >> .env
           echo "DATABASE=postgres" >> .env
-          echo "SECRET_KEY=django-insecure-bg=v3_$g7z@j8g0s4fet^f=wepr__**3!fgs@fe@#+4xomk^)#" >> .env
           echo "SQL_DATABASE=${{ secrets.SQL_DATABASE }}" >> .env
           echo "SQL_USER=${{ secrets.SQL_USER }}" >> .env
           echo "SQL_PASSWORD=${{ secrets.SQL_PASSWORD }}" >> .env
