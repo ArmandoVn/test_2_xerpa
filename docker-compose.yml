@@ -1,33 +1,18 @@
-version: "3"
+version: "3.8"
 
 services:
   db:
     image: postgres:13-alpine
     hostname: db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_DB=soccer_app
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
-  migrate:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - SQL_ENGINE=django.db.backends.postgresql
-      - SQL_DATABASE=soccer_app
-      - SQL_USER=postgres
-      - SQL_PASSWORD=postgres
-    command: python manage.py migrate
-    volumes:
-      - .:/src
-    depends_on:
-      - db
-
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     command: python manage.py runserver 0.0.0.0:8000
     environment:
       - SQL_ENGINE=django.db.backends.postgresql
@@ -35,7 +20,7 @@ services:
       - SQL_USER=postgres
       - SQL_PASSWORD=postgres
     volumes:
-      - .:/src
+      - .:/usr/src/app/
     ports:
       - "8000:8000"
     depends_on:
@@ -44,3 +29,19 @@ services:
   redis:
     restart: always
     image: redis:7.0.7-alpine
+
+  migrate:
+    build: .
+    environment:
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=soccer_app
+      - SQL_USER=postgres
+      - SQL_PASSWORD=postgres
+    command: python manage.py migrate --noinput
+    volumes:
+      - .:/usr/src/app/
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
