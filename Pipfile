@@ -16,7 +16,7 @@ flake8 = "*"
 pre-commit = "*"
 psycopg2-binary = "*"
 black = "*"
-gunicorn = "*"
+gunicorn = "==20.1.0"
 
 [dev-packages]
 
