@@ -1,26 +1,25 @@
-FROM python:3.10
+FROM python:3.11.1-alpine
 
-# set work directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# set environment variables
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get install -y --no-install-recommends gcc
+# Update pip and install pipenv :c
+RUN pip install --upgrade pip setuptools wheel pipenv
 
-# install dependencies
-RUN pip install --upgrade pip
-COPY ./requirements.txt /usr/src/app/requirements.txt
-RUN pip install -r /usr/src/app/requirements.txt
+# Copy code and dependencies
+COPY ./Pipfile ./Pipfile.lock /app/
+COPY ./soccer_app /app/soccer_app
+WORKDIR /app/soccer_app
 
-# copy entrypoint-prod.sh
-COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
+# Crete new container user
+RUN adduser -D -g '' player && chown player:player -R /app
+USER player
 
-# copy project
-COPY . /usr/src/app/
+# Install dependecies
+RUN pipenv sync
 
-# run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+EXPOSE 8000
+ENTRYPOINT ["pipenv", "run"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

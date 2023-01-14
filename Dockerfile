@@ -1,23 +1,23 @@
-# syntax=docker/dockerfile:1
-FROM python:3.10
-
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-RUN apt-get update && apt-get install -y --no-install-recommends gcc
+FROM python:3.11.1-alpine
 
 WORKDIR /app
 
-COPY ./requirements.txt /app/
-# Install dependencies
-RUN pip install -r requirements.txt
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED 1
 
-# Copy source code
+RUN pip install --upgrade pip setuptools wheel pipenv
+
+# Copy code and dependencies
+COPY ./Pipfile ./Pipfile.lock /app/
 COPY ./soccer_app /app/soccer_app
 WORKDIR /app/soccer_app
 
-# Expose the port 8000
-EXPOSE 8000
+# Crete new container user
+RUN adduser -D -g '' player && chown player:player -R /app
+USER player
+
+# Install dependecies
+RUN pipenv sync
+
+ENTRYPOINT ["pipenv", "run"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
