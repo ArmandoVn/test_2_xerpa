@@ -10,8 +10,8 @@ RUN pip install --upgrade pip setuptools wheel pipenv
 
 # Copy code and dependencies
 COPY ./Pipfile ./Pipfile.lock /app/
-COPY ./soccer_app /app/soccer_app
-WORKDIR /app/soccer_app
+COPY ./soccer_app /app/
+WORKDIR /app/
 
 # Crete new container user
 RUN adduser -D -g '' player && chown player:player -R /app
