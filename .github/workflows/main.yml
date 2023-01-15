@@ -44,12 +44,13 @@ jobs:
           docker push ${{ env.WEB_IMAGE }}
           docker push ${{ env.NGINX_IMAGE }}
 
-  tests:
-    name: Test 
+  test_project:
+    name: Test
     runs-on: ubuntu-latest
     needs: build
+    steps:
     - name: Run tests
-        run: python manage.py test .
+        run: docker-compose -f docker-compose.yml run web python manage.py test .
 
   deploy:
     name: Deploy to DigitalOcean
