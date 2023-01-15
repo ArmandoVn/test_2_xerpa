@@ -28,7 +28,11 @@ SECRET_KEY = "django-insecure-bg=v3_$g7z@j8g0s4fet^f=wepr__**3!fgs@fe@#+4xomk^)#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "146.190.164.103",
+]
 
 
 # Application definition
@@ -178,9 +182,3 @@ SWAGGER_SETTINGS = {
         "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
     }
 }
-
-
-if not DEBUG:
-    ALLOWED_HOSTS = [
-        "146.190.164.103",
-    ]
