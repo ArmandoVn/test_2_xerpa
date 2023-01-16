@@ -3,7 +3,7 @@
 This is a basic football API with players and teams.
 
 You can interact with them via 
-[Postman]("https://api.postman.com/collections/17143949-2d67e437-a117-4124-aa06-236e39f05714?access_key=PMAT-01GPP8YNJP8S97AXG9NPVMGDQW") or via [Swagger]("http://146.190.164.103/api/doc/")
+[Postman](https://api.postman.com/collections/17143949-2d67e437-a117-4124-aa06-236e39f05714?access_key=PMAT-01GPP8YNJP8S97AXG9NPVMGDQW) or via [Swagger](http://146.190.164.103/api/doc/)
 
 This project has two main models and a CRUD for each:
 

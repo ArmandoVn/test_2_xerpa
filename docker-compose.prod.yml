@@ -5,7 +5,7 @@ services:
     image: "${WEB_IMAGE}"
     command: gunicorn soccer_app.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static_volume:/app/soccer_app/static
+      - static_volume:/app/static
     ports:
       - 8000:8000
     env_file: .env
@@ -13,7 +13,7 @@ services:
   nginx:
     image: "${NGINX_IMAGE}"
     volumes:
-      - static_volume:/app/soccer_app/static
+      - static_volume:/app/static
     ports:
       - 80:80
     depends_on:
